@@ -105,10 +105,10 @@ export function MapClean() {
 
   function renderImage() {
     [process.env.PUBLIC_URL + "/c21-12.png", process.env.PUBLIC_URL + "/c21-1.png", star, triangle, rectangle].forEach(
-      (picture) => {
-        const img = new Image();
-        img.src = picture;
-      },
+        (picture) => {
+          const img = new Image();
+          img.src = picture;
+        },
     );
     const x = d3.scaleLinear().range([0, sWidth]).domain([-180, 180]);
     const y = d3.scaleLinear().range([0, sHeight]).domain([-90, 90]);
@@ -120,13 +120,13 @@ export function MapClean() {
       y2: sHeight,
     };
     zoom = d3
-      .zoom<any, unknown>()
-      .scaleExtent([1, setting.maxZoom])
-      .translateExtent([
-        [0, 0],
-        [sWidth, sHeight],
-      ])
-      .on("zoom", zoomed);
+        .zoom<any, unknown>()
+        .scaleExtent([1, setting.maxZoom])
+        .translateExtent([
+          [0, 0],
+          [sWidth, sHeight],
+        ])
+        .on("zoom", zoomed);
 
     d3.select("#render_map2 svg").remove();
     //@ts-ignore
@@ -135,21 +135,21 @@ export function MapClean() {
     svg.call(zoom);
     var imgG = node.append("g");
     imgG
-      .insert("svg:image")
-      .attr("preserveAspectRatio", "none")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", sWidth)
-      .attr("height", sHeight)
-      .attr("xlink:href", process.env.PUBLIC_URL + "/img-set/image-1.jpg");
+        .insert("svg:image")
+        .attr("preserveAspectRatio", "none")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", sWidth)
+        .attr("height", sHeight)
+        .attr("xlink:href", process.env.PUBLIC_URL + "/img-set/image-1.jpg");
     imgG
-      .insert("svg:image")
-      .attr("preserveAspectRatio", "none")
-      .attr("x", 0)
-      .attr("y", 0)
-      .attr("width", sWidth)
-      .attr("height", sHeight)
-      .attr("xlink:href", process.env.PUBLIC_URL + "/img-set/image.jpg");
+        .insert("svg:image")
+        .attr("preserveAspectRatio", "none")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", sWidth)
+        .attr("height", sHeight)
+        .attr("xlink:href", process.env.PUBLIC_URL + "/img-set/image.jpg");
 
     function zoomed() {
       handleMouseOut();
@@ -254,17 +254,17 @@ export function MapClean() {
       d3.event.stopPropagation();
       //@ts-ignore
       svg
-        .transition()
-        .duration(500)
-        .call(
-          //@ts-ignore
-          zoom.transform,
-          d3.zoomIdentity
-            .translate(sWidth / 2, sHeight / 2)
-            .scale(zoomLevel)
-            .translate(-x, -y),
-          //d3.mouse($this),
-        );
+          .transition()
+          .duration(500)
+          .call(
+              //@ts-ignore
+              zoom.transform,
+              d3.zoomIdentity
+                  .translate(sWidth / 2, sHeight / 2)
+                  .scale(zoomLevel)
+                  .translate(-x, -y),
+              //d3.mouse($this),
+          );
     }
 
     function drawObjects() {
@@ -288,17 +288,17 @@ export function MapClean() {
               shape = rectangle;
             }
             const rect = node
-              .insert("svg:image")
-              .attr("class", "coords")
-              .attr("preserveAspectRatio", "none")
-              .attr("x", x(Number(item["Longitude"])))
-              .attr("y", mY)
-              .attr("cursor", "pointer")
-              .attr("index", index)
-              .on("click", handleObjectClick)
-              .on("mouseover", handleHover)
-              .attr("xlink:href", shape)
-              .attr("opacity", "0");
+                .insert("svg:image")
+                .attr("class", "coords")
+                .attr("preserveAspectRatio", "none")
+                .attr("x", x(Number(item["Longitude"])))
+                .attr("y", mY)
+                .attr("cursor", "pointer")
+                .attr("index", index)
+                .on("click", handleObjectClick)
+                .on("mouseover", handleHover)
+                .attr("xlink:href", shape)
+                .attr("opacity", "0");
             rect.transition().duration(new Random().integer(500, 2000)).attr("opacity", "1");
           }
           mY = mY < 10 ? 10 : mY;
@@ -315,40 +315,52 @@ export function MapClean() {
                 useY += 24;
               }
               const url =
-                currentSelect === index
-                  ? process.env.PUBLIC_URL + "/c21-12.png"
-                  : process.env.PUBLIC_URL + "/c21-1.png";
+                  currentSelect === index
+                      ? process.env.PUBLIC_URL + "/c21-12.png"
+                      : process.env.PUBLIC_URL + "/c21-1.png";
               const size = currentSelect === index ? 30 : 25;
               node
-                .insert("svg:image")
-                .attr("class", "hover_image")
-                .attr("index", index)
-                .attr("x", useX)
-                .attr("y", useY)
-                .attr("width", size)
-                .attr("height", 16)
-                .attr("xlink:href", url);
+                  .insert("svg:image")
+                  .attr("class", "hover_image")
+                  .attr("index", index)
+                  .attr("x", useX)
+                  .attr("y", useY)
+                  .attr("width", size)
+                  .attr("height", 16)
+                  .attr("xlink:href", url);
+              node.append("rect")
+                  .attr("x",useX)
+                  .attr("class","rect-border")
+                  .attr("y",useY)
+                  .attr("width", size)
+                  .attr("index", index)
+                  .attr("height",16)
+                  .style("fill", "transparent")
+                  .style("stroke", "green")
+                  .style("stroke-width", "0.5px");
             }
             if (node.select(".label[index='" + index + "']").size() === 0) {
               const text = node
-                .append("text")
-                .attr("class", "label")
-                .attr("fill", "white")
-                .attr("x", x(Number(item["Longitude"])))
-                .attr("y", mY)
-                .attr("font-family", "Arial")
-                .attr("cursor", "pointer")
-                .attr("index", index)
-                .attr("font-size", txtFont - 1 + "px")
-                .html(item["WISE Objects"])
-                .on("click", handleObjectClick)
-                .on("mouseover", handleHover)
-                .attr("opacity", "0");
+                  .append("text")
+                  .attr("class", "label")
+                  .attr("fill", "white")
+                  .attr("x", x(Number(item["Longitude"])))
+                  .attr("y", mY)
+                  .attr("font-family", "Arial")
+                  .attr("cursor", "pointer")
+                  .attr("index", index)
+                  .attr("font-size", txtFont - 1 + "px")
+                  .html(item["WISE Objects"])
+                  .on("click", handleObjectClick)
+                  .on("mouseover", handleHover)
+                  .attr("opacity", "0");
               text.transition().duration(new Random().integer(100, 1000)).attr("opacity", "1");
             }
           } else if (currentSelect === -100) {
             node.select(".hover_image[index='" + index + "']").remove();
             node.select(".label[index='" + index + "']").remove();
+            node.select(".rect-border[index='" + index + "']").remove();
+
           }
           let textWidth = 4;
           if (sWidth - sWidth / 4 < x(Number(item["Longitude"]))) {
@@ -358,27 +370,27 @@ export function MapClean() {
           let rectSizeT = rectSize();
           if ((d3 && d3.event && d3.event.transform) || runFirstTime) {
             node
-              .select(".coords[index='" + index + "']")
-              //@ts-ignore
-              .transition()
-              .duration(random)
-              .attr("transform", "translate(-" + rectSizeT / 2 + ",-" + rectSizeT / 2 + ")")
-              .attr("height", rectSizeT)
-              .attr("width", rectSizeT)
-              .attr("opacity", "1");
+                .select(".coords[index='" + index + "']")
+                //@ts-ignore
+                .transition()
+                .duration(random)
+                .attr("transform", "translate(-" + rectSizeT / 2 + ",-" + rectSizeT / 2 + ")")
+                .attr("height", rectSizeT)
+                .attr("width", rectSizeT)
+                .attr("opacity", "1");
           }
           if (
-            (lastZoom > 1 || (highlightIndex && highlightIndex === index) || currentSelect === index) &&
-            node.select(".label[index='" + index + "']").size() > 0
+              (lastZoom > 1 || (highlightIndex && highlightIndex === index) || currentSelect === index) &&
+              node.select(".label[index='" + index + "']").size() > 0
           ) {
             node
-              .select(".label[index='" + index + "']")
-              //@ts-ignore
-              .transition()
-              .duration(random)
-              .attr("font-size", txtFont + "px")
-              .attr("transform", "translate(" + (textWidth + 1) + ",0)")
-              .attr("opacity", "1");
+                .select(".label[index='" + index + "']")
+                //@ts-ignore
+                .transition()
+                .duration(random)
+                .attr("font-size", txtFont + "px")
+                .attr("transform", "translate(" + (textWidth + 1) + ",0)")
+                .attr("opacity", "1");
           } else {
             node.select(".label[index='" + index + "']").remove();
           }
@@ -412,17 +424,17 @@ export function MapClean() {
     d3.event.stopPropagation();
     //@ts-ignore
     svg
-      .transition()
-      .duration(500)
-      .call(
-        //@ts-ignore
-        zoom.transform,
-        d3.zoomIdentity
-          .translate(sWidth / 2, sHeight / 2)
-          .scale(zoomLevel)
-          .translate(-x, -y),
-        d3.mouse($this),
-      );
+        .transition()
+        .duration(500)
+        .call(
+            //@ts-ignore
+            zoom.transform,
+            d3.zoomIdentity
+                .translate(sWidth / 2, sHeight / 2)
+                .scale(zoomLevel)
+                .translate(-x, -y),
+            d3.mouse($this),
+        );
   }
   // @ts-ignore
   const [loadPercent, setLoadPercent] = useState(0);
@@ -448,67 +460,67 @@ export function MapClean() {
   const customC = ObjectCoordinates.map((item, index) => objectModification(Object.assign({ i: index }, item)));
 
   return (
-    <>
-      <div
-        id="render_map2"
-        style={{
-          width: sWidth + "px",
-          height: sHeight + "px",
-          margin: "0 auto",
-          overflow: "hidden",
-        }}
-        className={loadPercent >= 100 ? "" : "hidden"}
-      >
-        {currentSelectU && currentSelectU >= 0 && (
-          <div className="display-area">
-            {customC
-              //.sort((a, b) => {
-              //  const distA = distance(a["Latitude"], a["Longitude"], customC[currentSelectU]["Latitude"], customC[currentSelectU]["Latitude"]);
-              //  const distB = distance(b["Latitude"], b["Longitude"], customC[currentSelectU]["Latitude"], customC[currentSelectU]["Latitude"]);
-              //  return distB - distA;
-              //})
-              .filter((item) => {
-                const dist = distance(
-                  customC[currentSelectU]["Latitude"],
-                  customC[currentSelectU]["Longitude"],
-                  item["Latitude"],
-                  item["Longitude"],
-                );
-                return dist < 20;
-              })
-              .map((item: ObjectInterface, index) => {
-                let shape = star;
-                if (item["Caldwell_Messier"].includes("C")) {
-                  shape = triangle;
-                } else if (item["Caldwell_Messier"].includes("M")) {
-                  shape = rectangle;
-                }
-                return (
-                  <div
-                    key={index}
-                    className="display-item"
-                    onClick={() => {
-                      if (d3.select(".coords[index='" + item.i + "']").size() > 0) {
-                        d3.select(".label").remove();
-                        d3.select(".hover_image").remove();
-                        d3.select(".coords[index='" + item.i + "']").dispatch("click");
+      <>
+        <div
+            id="render_map2"
+            style={{
+              width: sWidth + "px",
+              height: sHeight + "px",
+              margin: "0 auto",
+              overflow: "hidden",
+            }}
+            className={loadPercent >= 100 ? "" : "hidden"}
+        >
+          {currentSelectU && currentSelectU >= 0 && (
+              <div className="display-area">
+                {customC
+                    //.sort((a, b) => {
+                    //  const distA = distance(a["Latitude"], a["Longitude"], customC[currentSelectU]["Latitude"], customC[currentSelectU]["Latitude"]);
+                    //  const distB = distance(b["Latitude"], b["Longitude"], customC[currentSelectU]["Latitude"], customC[currentSelectU]["Latitude"]);
+                    //  return distB - distA;
+                    //})
+                    .filter((item) => {
+                      const dist = distance(
+                          customC[currentSelectU]["Latitude"],
+                          customC[currentSelectU]["Longitude"],
+                          item["Latitude"],
+                          item["Longitude"],
+                      );
+                      return dist < 20;
+                    })
+                    .map((item: ObjectInterface, index) => {
+                      let shape = star;
+                      if (item["Caldwell_Messier"].includes("C")) {
+                        shape = triangle;
+                      } else if (item["Caldwell_Messier"].includes("M")) {
+                        shape = rectangle;
                       }
-                    }}
-                  >
-                    <img src={shape} alt="" />
-                    {item["WISE Objects"]}
-                  </div>
-                );
-              })}
-          </div>
-        )}
-      </div>
-      <div className={"loader " + (loadPercent >= 100 ? "loaded" : "")}>
-        <div className="loader-inner">
-          <Line percent={loadPercent} strokeWidth={2} strokeColor="#D3D3D3" />
+                      return (
+                          <div
+                              key={index}
+                              className="display-item"
+                              onClick={() => {
+                                if (d3.select(".coords[index='" + item.i + "']").size() > 0) {
+                                  d3.select(".label").remove();
+                                  d3.select(".hover_image").remove();
+                                  d3.select(".coords[index='" + item.i + "']").dispatch("click");
+                                }
+                              }}
+                          >
+                            <img src={shape} alt="" />
+                            {item["WISE Objects"]}
+                          </div>
+                      );
+                    })}
+              </div>
+          )}
         </div>
-      </div>
-    </>
+        <div className={"loader " + (loadPercent >= 100 ? "loaded" : "")}>
+          <div className="loader-inner">
+            <Line percent={loadPercent} strokeWidth={2} strokeColor="#D3D3D3" />
+          </div>
+        </div>
+      </>
   );
 }
 
