@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/skymap/static/css/main.10c767c6.chunk.css",
+    "main.js": "/skymap/static/js/main.5e89b196.chunk.js",
+    "main.js.map": "/skymap/static/js/main.5e89b196.chunk.js.map",
+    "runtime-main.js": "/skymap/static/js/runtime-main.4cc3ab59.js",
+    "runtime-main.js.map": "/skymap/static/js/runtime-main.4cc3ab59.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/skymap/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.b9c5c657.chunk.js": "/skymap/static/js/2.b9c5c657.chunk.js",
+    "static/js/2.b9c5c657.chunk.js.map": "/skymap/static/js/2.b9c5c657.chunk.js.map",
+    "index.html": "/skymap/index.html",
+    "precache-manifest.3e3223809bf4efae4430d5d357b5cb5d.js": "/skymap/precache-manifest.3e3223809bf4efae4430d5d357b5cb5d.js",
+    "service-worker.js": "/skymap/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/skymap/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.10c767c6.chunk.css.map": "/skymap/static/css/main.10c767c6.chunk.css.map",
+    "static/js/2.b9c5c657.chunk.js.LICENSE.txt": "/skymap/static/js/2.b9c5c657.chunk.js.LICENSE.txt",
+    "static/media/rectangle.svg": "/skymap/static/media/rectangle.87c696b9.svg",
+    "static/media/star.svg": "/skymap/static/media/star.19b34dbf.svg",
+    "static/media/triangle.svg": "/skymap/static/media/triangle.d7fed549.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4cc3ab59.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.b9c5c657.chunk.js",
+    "static/css/main.10c767c6.chunk.css",
+    "static/js/main.5e89b196.chunk.js"
+  ]
+}
